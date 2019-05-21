@@ -2,10 +2,11 @@ language: c
 dist: xenial
 sudo: required
 env:
-  - USE_CCACHE=1
+  - USE_CCACHE=1 CCACHE_DIR=$HOME/ccache
 cache:
   directories:
   - $HOME/android
+  - $HOME/ccache
 before_install:
   - sudo apt-get update
   - sudo apt-get install -y bc bison build-essential ccache curl flex g++-multilib gcc-multilib git gnupg gperf imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev liblz4-tool libncurses5-dev libsdl1.2-dev libssl-dev libwxgtk3.0-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev
@@ -19,10 +20,10 @@ script:
   - curl https://storage.googleapis.com/git-repo-downloads/repo > $HOME/bin/repo
   - chmod a+x $HOME/bin/repo
   - cd $HOME/android/lineage
-  - yes | repo init -u https://github.com/unequaled86/android.git -b lineage-16.0
+  - yes | repo init -u https://github.com/unequaled86/android.git -b lineage-16.0 --depth=1
   - mkdir $HOME/android/lineage/.repo/local_manifests
   - sudo wget -q -O $HOME/android/lineage/.repo/local_manifests/proprietary.xml "https://raw.githubusercontent.com/TheMuppets/manifests/lineage-16.0/muppets.xml"
-  - travis_wait 120 repo sync -q -j 2
+  - travis_wait 120 repo sync -c -q --no-tags --no-clone-bundle -j$(nproc --all)
   - source build/envsetup.sh
   - breakfast bacon
   - croot
