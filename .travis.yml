@@ -19,7 +19,7 @@ script:
   - curl https://storage.googleapis.com/git-repo-downloads/repo > $HOME/bin/repo
   - chmod a+x $HOME/bin/repo
   - cd $HOME/android/lineage
-  - yes | repo init -u https://github.com/LineageOS/android.git -b lineage-16.0
+  - yes | repo init -u https://github.com/unequaled86/android.git -b lineage-16.0
   - mkdir $HOME/android/lineage/.repo/local_manifests
   - sudo wget -q -O $HOME/android/lineage/.repo/local_manifests/proprietary.xml "https://raw.githubusercontent.com/TheMuppets/manifests/lineage-16.0/muppets.xml"
   - travis_wait 120 repo sync -q -j 2
