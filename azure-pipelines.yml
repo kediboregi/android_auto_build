@@ -1,0 +1,36 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+
+- script: |
+    echo Add other tasks to build, test, and deploy your project.
+    echo See https://aka.ms/yaml
+    sudo apt-get install -y bc bison build-essential curl flex g++-multilib gcc-multilib git gnupg gperf imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev liblz4-tool libncurses5-dev libsdl1.2-dev libssl-dev libwxgtk3.0-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev
+    sudo apt-get -o Dpkg::Options::="--force-overwrite" install openjdk-9-jdk
+    git config --global user.name unequaled86
+    git config --global user.email unequaled86@gmail.com
+    mkdir -p $HOME/bin
+    mkdir -p $HOME/android/lineage
+    curl https://storage.googleapis.com/git-repo-downloads/repo > $HOME/bin/repo
+    chmod a+x $HOME/bin/repo
+    cd $HOME/android/lineage
+    yes | repo init -u https://github.com/unequaled86/android.git -b lineage-16.0 --depth=1
+    mkdir $HOME/android/lineage/.repo/local_manifests
+    sudo wget -q -O $HOME/android/lineage/.repo/local_manifests/proprietary.xml "https://raw.githubusercontent.com/TheMuppets/manifests/lineage-16.0/muppets.xml"
+    repo sync -c -j 4 --no-tags --no-clone-bundle --force-sync
+    source build/envsetup.sh
+    breakfast bacon
+    croot
+    brunch bacon
+  displayName: 'Run a multi-line script'
