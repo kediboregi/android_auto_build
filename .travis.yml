@@ -15,7 +15,7 @@ before_install:
   - curl https://storage.googleapis.com/git-repo-downloads/repo > $HOME/bin/repo
   - chmod a+x $HOME/bin/repo
   - cd $HOME/android/lineage
-  - repo init -u https://github.com/LineageOS/android.git -b lineage-16.0
+  - yes | repo init -u https://github.com/LineageOS/android.git -b lineage-16.0
   - wget -q -O .repo/local_manifests/proprietary.xml "https://raw.githubusercontent.com/TheMuppets/manifests/lineage-16.0/muppets.xml"
   - repo sync
   - source build/envsetup.sh
