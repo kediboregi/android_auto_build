@@ -3,7 +3,6 @@ dist: xenial
 sudo: required
 env:
   - USE_CCACHE=1
-  - CCACHE_COMPRESS=1
 cache:
   directories:
   - $HOME/android
