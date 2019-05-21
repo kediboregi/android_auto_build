@@ -1,4 +1,4 @@
-language: c
+language: minimal
 dist: xenial
 sudo: required
 env:
@@ -12,7 +12,7 @@ before_install:
   - sudo apt-get install -y bc bison build-essential ccache curl flex g++-multilib gcc-multilib git gnupg gperf imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev liblz4-tool libncurses5-dev libsdl1.2-dev libssl-dev libwxgtk3.0-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev
   - sudo apt-get -o Dpkg::Options::="--force-overwrite" install openjdk-9-jdk
 script:
-  - ccache -M 10G
+  - ccache -M 5G
   - git config --global user.name unequaled86
   - git config --global user.email unequaled86@gmail.com
   - mkdir -p $HOME/bin
@@ -23,7 +23,7 @@ script:
   - yes | repo init -u https://github.com/unequaled86/android.git -b lineage-16.0 --depth=1
   - mkdir $HOME/android/lineage/.repo/local_manifests
   - sudo wget -q -O $HOME/android/lineage/.repo/local_manifests/proprietary.xml "https://raw.githubusercontent.com/TheMuppets/manifests/lineage-16.0/muppets.xml"
-  - repo sync -c --no-tags --no-clone-bundle -j2
+  - repo sync -c --no-tags --no-clone-bundle -j4
   - source build/envsetup.sh
   - breakfast bacon
   - croot
