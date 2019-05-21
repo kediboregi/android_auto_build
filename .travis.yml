@@ -18,7 +18,7 @@ before_install:
   - yes | repo init -u https://github.com/LineageOS/android.git -b lineage-16.0
   - mkdir $HOME/android/lineage/.repo/local_manifests
   - sudo wget -q -O $HOME/android/lineage/.repo/local_manifests/proprietary.xml "https://raw.githubusercontent.com/TheMuppets/manifests/lineage-16.0/muppets.xml"
-  - repo sync
+  - repo sync -q -j 4
   - source build/envsetup.sh
   - breakfast bacon
 script:
