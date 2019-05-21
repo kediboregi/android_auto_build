@@ -23,7 +23,7 @@ script:
   - yes | repo init -u https://github.com/unequaled86/android.git -b lineage-16.0 --depth=1
   - mkdir $HOME/android/lineage/.repo/local_manifests
   - sudo wget -q -O $HOME/android/lineage/.repo/local_manifests/proprietary.xml "https://raw.githubusercontent.com/TheMuppets/manifests/lineage-16.0/muppets.xml"
-  - repo sync -c --no-tags --no-clone-bundle -j$(nproc --all)
+  - repo sync -c --no-tags --no-clone-bundle -j2
   - source build/envsetup.sh
   - breakfast bacon
   - croot
