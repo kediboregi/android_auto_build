@@ -22,7 +22,7 @@ script:
   - yes | repo init -u https://github.com/LineageOS/android.git -b lineage-16.0
   - mkdir $HOME/android/lineage/.repo/local_manifests
   - sudo wget -q -O $HOME/android/lineage/.repo/local_manifests/proprietary.xml "https://raw.githubusercontent.com/TheMuppets/manifests/lineage-16.0/muppets.xml"
-  - travis_wait 60 sleep infinity & repo sync -q -j 2
+  - travis_wait 120 repo sync -q -j 2
   - source build/envsetup.sh
   - breakfast bacon
   - croot
